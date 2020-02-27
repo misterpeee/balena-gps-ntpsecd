@@ -1,0 +1,8 @@
+/usr/sbin/gpsd -n /dev/ttyAMA0 /dev/pps0
+sleep 10
+/usr/sbin/ntpd -c /etc/ntpsec/ntp.conf
+
+while [ 1 = 1 ]
+do
+	sleep 60
+done

@@ -1,0 +1,7 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%:buster
+
+RUN install_packages scons libncurses5-dev python-dev pps-tools gpsd gpsd-clients dbus 
+
+CMD /usr/sbin/gpsd -Nn /dev/ttyAMA0
+
+

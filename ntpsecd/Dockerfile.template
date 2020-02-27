@@ -1,0 +1,12 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%:buster
+
+RUN install_packages scons libncurses5-dev python-dev pps-tools dbus ntpsec
+
+COPY ntp.conf /etc/ntp.conf.new
+
+COPY run.sh /tmp/run.sh
+
+RUN chmod +x /tmp/run.sh
+
+CMD /tmp/run.sh
+

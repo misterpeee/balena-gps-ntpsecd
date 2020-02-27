@@ -1,0 +1,11 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%:buster
+
+RUN install_packages dbus
+
+COPY run.sh /tmp/run.sh
+
+RUN chmod +x /tmp/run.sh
+
+CMD ["bash", "/tmp/run.sh"]
+
+

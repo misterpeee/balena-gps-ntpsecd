@@ -1,0 +1,28 @@
+version: '2'
+services: 
+  gpsd:
+    privileged: true
+    ipc: "host"
+    build: "./gpsd"
+    devices: 
+      - "/dev/ttyAMA0:/dev/ttyAMA0"
+    environment:
+      - "DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket"
+  ntpsecd:
+    privileged: true
+    depends_on:
+     - "gpsd"
+    build: "./ntpsecd"
+    ipc: "host"
+    ports:
+      - "123"
+      - "123/udp"
+    devices:
+     - "/dev/pps0:/dev/pps0"
+    labels:
+      io.balena.features.dbus: '1'
+  ntpsecdobserver:
+    build: "./ntpsecdobserver"
+    labels:
+      io.balena.features.supervisor-api: '1'    
+      io.balena.features.dbus: '1'
