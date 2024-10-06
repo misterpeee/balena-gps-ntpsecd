@@ -65,9 +65,19 @@ Firstly and most importantly the project will currently only work with the produ
 
 Once your device is booted up and you can see it in the Balena console, the next step is to add a custom configuration variable for your device:
 
+(for Raspberry Pi's 4 and below)
+
 ```
 RESIN_HOST_CONFIG_dtoverlay - "pi3-miniuart-bt","pps-gpio,gpiopin=4"
 RESIN_HOST_CONFIG_nohz = off
+```
+
+for Raspberry Pi 5 ive been advised (i havent tested!) the overlay needs modification:
+
+```
+RESIN_HOST_CONFIG_dtoverlay - "disable-bt","pps-gpio,gpiopin=4"
+RESIN_HOST_CONFIG_nohz = off
+RESIN_HOST_CONFIG_dtparam = "uart0"
 ```
 
 The first variable will disable the onboard Bluetooth reciever that uses the UART port and will also enable the PPS capability in the Linux kernel.
